@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@100;200;300;400;500;600;700;800;900&display=swap');
+/* 
+caso precise do link
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">  
+*/
+$system-default-font-family: -apple-system, 'Barlow','Lato', 'Roboto', sans-serif,;
+
+$heading-font-family: "Barlow";
+$heading-font-weight: 800;
+
+$content-font-family: $system-default-font-family;
+$content-font-weight: 500;
+
+
+
+
+%font-heading {
+  font-family: $heading-font-family;
+  font-weight: $heading-font-weight;
+  color: $color-heading-text;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+%font-content {
+  font-family: $content-font-family;
+  font-weight: $content-font-weight;
+  color: $color-text;
+}

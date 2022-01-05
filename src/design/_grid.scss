@@ -1,0 +1,53 @@
+$grid-breakpoints: ( xs: 320px, sm: 540px, md: 768px, lg: 1024px, xl: 1280px) !default;
+
+@function breakpoint-min($name, $breakpoints: $grid-breakpoints) {
+  $min: map-get($breakpoints, $name);
+  @return if($min != 0, $min, null);
+}
+
+@function breakpoint-max($name, $breakpoints: $grid-breakpoints) {
+  $max: map-get($breakpoints, $name);
+  @return if($max != 0, $max, null);
+}
+
+@mixin media-breakpoint-up($name, $breakpoints: $grid-breakpoints) {
+  $min: breakpoint-min($name, $breakpoints);
+  @if $min {
+    @media (min-width: $min) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+@mixin media-breakpoint-down($name, $breakpoints: $grid-breakpoints) {
+  $max: breakpoint-max($name, $breakpoints);
+  @if $max {
+    @media (max-width: $max) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+
+.container {
+  margin: 0 auto;
+  max-width: 100%;
+  padding: 0 25px;
+  @include media-breakpoint-up(sm) {
+    max-width: 460px;
+    padding: 0;
+  }
+  @include media-breakpoint-up(md) {
+    max-width: 700px;
+  }
+  @include media-breakpoint-up(lg) {
+    max-width: 940px;
+  }
+  @include media-breakpoint-up(xl) {
+    max-width: 1180px;
+  }
+}

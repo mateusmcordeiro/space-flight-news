@@ -1,0 +1,26 @@
+$color-body-bg: #f9f7f5;
+
+$primary-color: #ff6847;
+$primary-color--hover: #cf4d30;
+$secondary-color: #0085ff;
+$shark-color: #092942;
+$dark-color: #011524;
+
+:root {
+  --primary: $primary-color;
+  --secondary: $secondary-color;
+  --shark: $shark-color;
+  --dark: $dark-colo;
+}
+
+$color-text: white;
+$color-heading-text: $primary-color;
+
+$color-link-text: #39a275;
+$color-link-text-active: $color-text;
+
+$color-input-border: lighten($color-heading-text, 50%);
+
+$color-button-bg: $color-link-text;
+$color-button-disabled-bg: darken(desaturate($color-button-bg, 20%), 10%);
+$color-button-text: white;
