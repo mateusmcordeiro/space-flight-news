@@ -157,7 +157,6 @@
   @return $a + ($b - $a) * $t;
 }
 
-
 @function typography-number($value) {
   @if type-of($value) == 'number' {
     @return $value;
@@ -236,6 +235,7 @@
 }
 
 $typography-type-scale: (
+  -2: 0.75rem,
   -1: 0.889rem,
   0: 1rem,
   1: 1.125rem,
@@ -254,6 +254,7 @@ $typography-type-scale: (
 }
 
 $typography-type-scale-contrast: (
+  -2: 0.75rem,
   -1: 1rem,
   0: 1.3333rem,
   1: 1.777rem,
@@ -275,6 +276,7 @@ $typography-base-font-size: 1rem;
 $typography-base-line-height: $typography-base-font-size * 1.25;
 
 $typography-line-heights: (
+  -2: $typography-base-line-height * 0.65,
   -1: $typography-base-line-height,
   0: $typography-base-line-height,
   1: $typography-base-line-height * 1.5,
@@ -295,6 +297,7 @@ $typography-line-heights: (
 $typography-base-line-height-contrast: $typography-base-line-height;
 
 $typography-line-heights-contrast: (
+  -2: $typography-base-line-height-contrast * 0.8,
   -1: $typography-base-line-height-contrast,
   0: $typography-base-line-height-contrast * 2,
   1: $typography-base-line-height-contrast * 2,
@@ -358,7 +361,6 @@ $typography-line-heights-contrast: (
   @extend %font-heading;
 }
 
-
 %typography-small {
   @include typography-got-rhythm(-1);
 
@@ -369,4 +371,9 @@ $typography-line-heights-contrast: (
   @include typography-got-rhythm(-1);
 
   @extend %font-heading;
+}
+%typography-small-x {
+  @include typography-got-rhythm(-2);
+
+  @extend %font-content;
 }

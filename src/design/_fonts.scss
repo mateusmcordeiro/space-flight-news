@@ -1,19 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@100;200;300;400;500;600;700;800;900&display=swap');
-/* 
-caso precise do link
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">  
-*/
-$system-default-font-family: -apple-system, 'Barlow','Lato', 'Roboto', sans-serif,;
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap');
 
-$heading-font-family: "Barlow";
+$system-default-font-family: 'Roboto Condensed', -apple-system, sans-serif;
+
+$heading-font-family: 'Roboto Condensed';
 $heading-font-weight: 800;
 
 $content-font-family: $system-default-font-family;
 $content-font-weight: 500;
-
-
-
 
 %font-heading {
   font-family: $heading-font-family;
