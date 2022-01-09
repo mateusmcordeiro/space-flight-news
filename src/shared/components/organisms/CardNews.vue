@@ -1,5 +1,12 @@
 <template>
-  <card :class="$style['card-news']" transparent>
+  <card
+    :class="{
+      [$style['card-news']]: true,
+      [$style['card-news__no-height-limit']]: removeTextLimit,
+    }"
+    :fullWidth="removeTextLimit"
+    transparent
+  >
     <template v-slot:image>
       <img :src="backgroundCard" />
     </template>
@@ -21,8 +28,30 @@
           non videntur, nec omnino rest est." Et examine ab eis praecepta eius
           quae Opus igitur est dicere possit dura omni specie, "Tu autem in
           specie, non videntur, nec omnino rest est." Et examine ab eis
+          praecepta eius quae Opus igitur est dicere possit dura omni specie,
+          "Tu autem in specie, non videntur, nec omnino rest est." Et examine ab
+          eis praecepta eius quae Opus igitur est dicere possit dura omni
+          specie, "Tu autem in specie, non videntur, nec omnino rest est." Et
+          examine ab eis praecepta eius quae Opus igitur est dicere possit dura
+          omni specie, "Tu autem in specie, non videntur, nec omnino rest est."
+          Et examine ab eis praecepta eius quae Opus igitur est dicere possit
+          dura omni specie, "Tu autem in specie, non videntur, nec omnino rest
+          est." Et examine ab eis praecepta eius quae Opus igitur est dicere
+          possit dura omni specie, "Tu autem in specie, non videntur, nec omnino
+          rest est." Et examine ab eis praecepta eius quae Opus igitur est
+          dicere possit dura omni specie, "Tu autem in specie, non videntur, nec
+          omnino rest est." Et examine ab eis praecepta eius quae Opus igitur
+          est dicere possit dura omni specie, "Tu autem in specie, non videntur,
+          nec omnino rest est." Et examine ab eis praecepta eius quae Opus
+          igitur est dicere possit dura omni specie, "Tu autem in specie, non
+          videntur, nec omnino rest est." Et examine ab eis praecepta eius quae
+          Opus igitur est dicere possit dura omni specie, "Tu autem in specie,
+          non videntur, nec omnino rest est." Et examine ab eis praecepta eius
+          quae Opus igitur est dicere possit dura omni specie, "Tu autem in
+          specie, non videntur, nec omnino rest est." Et examine ab eis
           praecepta eius quae
         </p>
+
         <s-f-button @click="$emit('openNews', $event)">Ver mais</s-f-button>
       </article>
     </template>
@@ -34,6 +63,9 @@ import SFButton from '@/shared/components/atoms/SFButton';
 import backgroundCard from '@/assets/images/card.jpg';
 import Badge from '@/shared/components/atoms/Badge';
 export default {
+  props: {
+    removeTextLimit: Boolean,
+  },
   components: {
     Card,
     SFButton,
@@ -83,6 +115,14 @@ export default {
       color: white;
       max-height: 99px;
       overflow: hidden;
+    }
+  }
+  &__no-height-limit {
+    #{$self}__resume {
+      p {
+        overflow: auto;
+        max-height: 100%;
+      }
     }
   }
 }

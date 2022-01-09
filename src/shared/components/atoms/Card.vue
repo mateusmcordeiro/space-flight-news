@@ -4,6 +4,7 @@
       [$style.card]: true,
       [$style.card__reversed]: reversed,
       [$style.card__transparent]: transparent,
+      [$style.card__full]: fullWidth,
     }"
   >
     <div :class="$style.card__image">
@@ -21,6 +22,7 @@ export default {
   props: {
     reversed: Boolean,
     transparent: Boolean,
+    fullWidth: Boolean,
   },
   setup() {},
 };
@@ -82,6 +84,26 @@ export default {
   }
   &#{$self}__transparent {
     background-color: transparent;
+  }
+  &#{$self}__full {
+    max-width: 100% !important;
+    height: 100% !important;
+    align-items: center;
+
+    @include media-breakpoint-up(md) {
+      align-items: flex-start;
+    }
+    #{$self}__content {
+      @include media-breakpoint-up(sm) {
+        max-width: 400px;
+      }
+      #{$self}__container {
+        max-width: 100%;
+        @include media-breakpoint-up(md) {
+          max-width: 381px;
+        }
+      }
+    }
   }
 }
 </style>

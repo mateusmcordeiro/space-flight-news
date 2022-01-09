@@ -24,6 +24,10 @@
         />
       </section>
     </div>
+    <modal-news
+      @onClose="modalData.active = false"
+      :active="modalData.active"
+    />
   </article>
 </template>
 
@@ -33,21 +37,24 @@ import { reactive } from '@vue/reactivity';
 import logo from '@/shared/components/assets/Logo.vue';
 import Card from '@/shared/components/organisms/CardNews.vue';
 import InfiniteLoad from '@/shared/components/molecules/InfiniteLoad.vue';
+import ModalNews from '@/shared/components/organisms/ModalNews.vue';
 export default {
   name: 'App',
   components: {
     logo,
     Card,
     InfiniteLoad,
+    ModalNews,
   },
   setup() {
     const loadingNews = reactive({ loading: false });
-
+    const modalData = reactive({ active: false });
     const print = (e) => {
-      loadingNews.loading = !loadingNews.loading;
+      //loadingNews.loading = !loadingNews.loading;
+      modalData.active = !modalData.active;
       console.log('a', e);
     };
-    return { print, loadingNews };
+    return { print, loadingNews, modalData };
   },
 };
 </script>

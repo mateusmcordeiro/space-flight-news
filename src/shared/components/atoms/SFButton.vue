@@ -29,8 +29,8 @@ export default {
   @extend %typography-small;
   &:hover {
     background: transparent;
-    color: white;
-    border: 1px solid white;
+    color: var(--shark-light);
+    border: 1px solid var(--shark-light);
   }
   &__outline {
     background: transparent;

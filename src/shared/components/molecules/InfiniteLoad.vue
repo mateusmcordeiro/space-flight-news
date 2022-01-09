@@ -49,7 +49,6 @@ export default {
     watch(
       () => props.loading,
       (value) => {
-        console.log(value);
         if (value) {
           startLoadEffect();
         } else {
