@@ -3,11 +3,13 @@ $color-body-bg: #f9f7f5;
 $primary-color: #d07017;
 $primary-color--hover: darken($primary-color, 10%);
 $shark-color: #302e53;
+$shark-light-color: lighten($shark-color, 10%);
 $dark-color: #1e2022;
 
 :root {
   --primary: #{$primary-color};
   --shark: #{$shark-color};
+  --shark-light: #{$shark-light-color};
   --dark: #{$dark-color};
 }
 

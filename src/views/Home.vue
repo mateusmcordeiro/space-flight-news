@@ -14,41 +14,40 @@
   <article :class="$style['space-flight__content']">
     <div :class="$style.container">
       <section :class="$style['space-flight__list']">
-        <card @openNews="print">
-          <template v-slot:image>
-            <img :src="backgroundCard" />
-          </template>
-          <template v-slot:content>
-            maria
-          </template>
-        </card>
-        <card @openNews="print" reversed>
-          <template v-slot:image>
-            <img :src="backgroundCard" />
-          </template>
-          <template v-slot:content>
-            maria
-          </template>
-        </card>
+        <card @openNews="print" />
+        <card @openNews="print" reversed />
+      </section>
+      <section :class="$style['space-flight__load-more']">
+        <infinite-load
+          @onLoadRequested="print"
+          :loading="loadingNews.loading"
+        />
       </section>
     </div>
   </article>
 </template>
 
 <script>
+import { reactive } from '@vue/reactivity';
+
 import logo from '@/shared/components/assets/Logo.vue';
 import Card from '@/shared/components/organisms/CardNews.vue';
+import InfiniteLoad from '@/shared/components/molecules/InfiniteLoad.vue';
 export default {
   name: 'App',
   components: {
     logo,
     Card,
+    InfiniteLoad,
   },
   setup() {
+    const loadingNews = reactive({ loading: false });
+
     const print = (e) => {
+      loadingNews.loading = !loadingNews.loading;
       console.log('a', e);
     };
-    return { print };
+    return { print, loadingNews };
   },
 };
 </script>

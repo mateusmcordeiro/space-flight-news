@@ -1,6 +1,6 @@
 <template>
   <button
-    :class="{ [$style.button]: true, [$style['button__outline']]: outline }"
+    :class="{ [$style.button]: true, [$style.button__outline]: outline }"
     v-bind="$attrs"
   >
     <slot />
@@ -33,6 +33,14 @@ export default {
     border: 1px solid white;
   }
   &__outline {
+    background: transparent;
+    color: var(--shark-light);
+    border: 1px solid var(--shark-light);
+    &:hover {
+      background: var(--shark-light);
+      color: white;
+      border: 1px solid var(--shark-light);
+    }
   }
 }
 </style>
