@@ -77,7 +77,10 @@ export default {
 };
 </script>
 <style lang="scss" module>
-@import '~@/design';
+@import '~@/design/_colors';
+@import '~@/design/_fonts';
+@import '~@/design/_sizes';
+@import '~@/design/_typography';
 .card-news {
   $self: &;
   &__header {

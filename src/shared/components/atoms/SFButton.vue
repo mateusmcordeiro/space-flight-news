@@ -16,7 +16,10 @@ export default {
 };
 </script>
 <style lang="scss" module>
-@import '~@/design';
+@import '~@/design/_colors';
+@import '~@/design/_fonts';
+@import '~@/design/_sizes';
+@import '~@/design/_typography';
 .button {
   $self: &;
   background: var(--shark);

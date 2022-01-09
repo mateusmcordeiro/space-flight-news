@@ -18,7 +18,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-@import '@design';
+@import '~@/design/_colors';
 main {
   padding-bottom: 50px;
   background-color: $dark-color;

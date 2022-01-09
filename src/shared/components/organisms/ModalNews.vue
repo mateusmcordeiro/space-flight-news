@@ -42,7 +42,7 @@ export default {
 };
 </script>
 <style lang="scss" module>
-@import '~@/design';
+@import '~@/design/_grid';
 .modal-news {
   $self: &;
   position: fixed;

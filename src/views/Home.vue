@@ -60,7 +60,12 @@ export default {
 </script>
 
 <style lang="scss" module>
-@import '~@/design';
+@import '~@/design/_colors';
+@import '~@/design/_fonts';
+@import '~@/design/_sizes';
+@import '~@/design/_typography';
+@import '~@/design/_layers';
+@import '~@/design/_grid';
 .space-flight {
   $self: &;
   &__header {

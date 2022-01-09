@@ -7,3 +7,10 @@
 @import 'mixins';
 @import 'grid';
 @import 'general';
+
+:root {
+  --primary: #{$primary-color};
+  --shark: #{$shark-color};
+  --shark-light: #{$shark-light-color};
+  --dark: #{$dark-color};
+}

@@ -6,13 +6,6 @@ $shark-color: #302e53;
 $shark-light-color: lighten($shark-color, 10%);
 $dark-color: #1e2022;
 
-:root {
-  --primary: #{$primary-color};
-  --shark: #{$shark-color};
-  --shark-light: #{$shark-light-color};
-  --dark: #{$dark-color};
-}
-
 $color-text: white;
 $color-heading-text: $primary-color;
 
