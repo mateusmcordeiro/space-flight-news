@@ -1,6 +1,7 @@
 const path = require('path');
 
 const pathAliasMap = {
+  '@assets': path.resolve(__dirname, './src/assets'),
   '@src': path.join(__dirname, './src/'),
   '@core': path.join(__dirname, './src/core/'),
   '@store': path.join(__dirname, './src/core/store/'),
@@ -22,5 +23,4 @@ module.exports = {
       alias: pathAliasMap,
     },
   },
-  publicPath: '/umovie/',
 };

@@ -21,6 +21,6 @@ export default {
 @import '@design';
 main {
   padding-bottom: 50px;
-  background-color: $shark-color;
+  background-color: $dark-color;
 }
 </style>
