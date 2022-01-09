@@ -64,10 +64,8 @@ export default {
   &__content {
     #{$self}__container {
       max-width: 330px;
-      padding: 20px 0px;
 
       @include media-breakpoint-up(md) {
-        padding: 0px 20px 0 40px;
         height: 100%;
       }
     }
@@ -99,7 +97,9 @@ export default {
       }
       #{$self}__container {
         max-width: 100%;
+        padding: 20px 0px;
         @include media-breakpoint-up(md) {
+          padding: 0px 0px 0 40px;
           max-width: 381px;
         }
       }
