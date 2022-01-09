@@ -1,6 +1,7 @@
 <template>
   <header :class="$style['space-flight__header']">
     <div :class="$style.container">
+      <s-f-input name="maria" placeholder="Search" isSearch />
       <div :class="$style.logo">
         <div :class="$style['logo-radius']">
           <logo :class="$style['logo-svg']" />
@@ -38,6 +39,7 @@ import logo from '@/shared/components/assets/Logo.vue';
 import Card from '@/shared/components/organisms/CardNews.vue';
 import InfiniteLoad from '@/shared/components/molecules/InfiniteLoad.vue';
 import ModalNews from '@/shared/components/organisms/ModalNews.vue';
+import SFInput from '@/shared/components/atoms/SFInput.vue';
 export default {
   name: 'App',
   components: {
@@ -45,6 +47,7 @@ export default {
     Card,
     InfiniteLoad,
     ModalNews,
+    SFInput,
   },
   setup() {
     const loadingNews = reactive({ loading: false });
