@@ -78,7 +78,7 @@ export default {
     display: flex;
     position: relative;
     justify-content: center;
-    min-height: 40vh;
+    min-height: 50vh;
     max-height: 100%;
     padding: 93px 0px;
 
