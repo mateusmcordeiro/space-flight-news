@@ -1,7 +1,7 @@
 <template>
   <div :class="{ [$style.input]: true, [$style.input__search]: isSearch }">
     <div :class="$style.input__content">
-      <input v-bind="$attrs" />
+      <input v-bind="$attrs" :value="modelValue" @input="updateInput" />
       <button type="submit" :class="$style['input__search-button']">
         <vue-feather type="search"></vue-feather>
       </button>
@@ -18,8 +18,17 @@ export default {
   inheritAttrs: false,
   props: {
     isSearch: Boolean,
+    modelValue: {
+      type: [String, Number],
+      default: '',
+    },
   },
-  setup() {},
+  setup(props, { emit }) {
+    const updateInput = (e) => {
+      emit('update:modelValue', e.target.value);
+    };
+    return { updateInput };
+  },
 };
 </script>
 <style lang="scss" module>
