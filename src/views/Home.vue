@@ -1,24 +1,135 @@
 <template>
-  <header class="space-flight__header">
-    <div class="container">
-      <h1 class="logo">
-        Space Flight news
-      </h1>
+  <header :class="$style['space-flight__header']">
+    <div :class="$style.container">
+      <div :class="$style.logo">
+        <div :class="$style['logo-radius']">
+          <logo :class="$style['logo-svg']" />
+        </div>
+        <h1>
+          Space Flight news
+        </h1>
+      </div>
     </div>
   </header>
-  <article class="space-flight__content">
-    <section class="space-flight__list"></section>
+  <article :class="$style['space-flight__content']">
+    <div :class="$style.container">
+      <section :class="$style['space-flight__list']">
+        <card @openNews="print">
+          <template v-slot:image>
+            <img :src="backgroundCard" />
+          </template>
+          <template v-slot:content>
+            maria
+          </template>
+        </card>
+        <card @openNews="print" reversed>
+          <template v-slot:image>
+            <img :src="backgroundCard" />
+          </template>
+          <template v-slot:content>
+            maria
+          </template>
+        </card>
+      </section>
+    </div>
   </article>
 </template>
 
 <script>
+import logo from '@/shared/components/assets/Logo.vue';
+import Card from '@/shared/components/organisms/CardNews.vue';
 export default {
   name: 'App',
-  components: {},
+  components: {
+    logo,
+    Card,
+  },
   setup() {
-    return {};
+    const print = (e) => {
+      console.log('a', e);
+    };
+    return { print };
   },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" module>
+@import '~@/design';
+.space-flight {
+  $self: &;
+  &__header {
+    align-items: center;
+    border-bottom: 2px solid var(--primary);
+
+    display: flex;
+    position: relative;
+    justify-content: center;
+    min-height: 40vh;
+    max-height: 100%;
+    padding: 93px 0px;
+
+    &:before {
+      position: absolute;
+      z-index: $layer-page-z-index;
+      left: 0;
+      top: 0;
+      content: ' ';
+      height: 100%;
+      width: 100%;
+      background-position: bottom right;
+      background-repeat: no-repeat;
+      background-image: url('~@/assets/images/hero-bg.jpg');
+      background-size: cover;
+      mix-blend-mode: hard-light;
+    }
+    .container {
+      align-items: center;
+      z-index: $layer-dropdown-z-index;
+      display: flex;
+      justify-content: center;
+      height: 100%;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+
+      .logo-radius {
+        padding: 30px;
+        border-radius: 100%;
+        border: 2px solid var(--primary);
+      }
+      .logo-svg {
+        width: 40px;
+        fill: var(--primary);
+        @include media-breakpoint-up(sm) {
+          width: 50px;
+        }
+        @include media-breakpoint-up(md) {
+          width: 80px;
+        }
+      }
+      h1 {
+        cursor: pointer;
+        @extend %typography-xlarge;
+        color: var(--primary);
+        span {
+          @extend %typography-large;
+          color: $primary-color;
+        }
+      }
+    }
+  }
+  &__content {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    #{$self}__list {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      gap: 80px;
+      justify-content: center;
+    }
+  }
+}
+</style>
