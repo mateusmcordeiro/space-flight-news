@@ -14,17 +14,25 @@
         />
       </section>
       <section :class="$style['space-flight__load-more']">
-        <infinite-load @onLoadRequested="openModal" :loading="isLoadingNews" />
+        <infinite-load
+          @onLoadRequested="loadMoreArticles"
+          :loading="isLoadingNews"
+        />
       </section>
     </div>
-    <modal-news @onClose="closeModal" :active="modalData.active" />
+    <modal-news
+      @onClose="closeModal"
+      :news="modalData.data"
+      :loading="modalData.loading"
+      :active="modalData.active"
+    />
   </article>
 </template>
 <script>
 import Card from '@/shared/components/organisms/CardNews.vue';
 import InfiniteLoad from '@/shared/components/molecules/InfiniteLoad.vue';
 import ModalNews from '@/shared/components/organisms/ModalNews.vue';
-import { computed, getCurrentInstance, watch } from 'vue';
+import { computed, getCurrentInstance } from 'vue';
 export default {
   components: {
     Card,
@@ -33,19 +41,17 @@ export default {
   },
   setup() {
     const { ctx } = getCurrentInstance();
+    const lastLoadedId = computed(() => {
+      return ctx.$store.state.article.modal.lastLoadedId;
+    });
     const modalData = computed(() => {
       return {
         ...ctx.$store.state.article.modal,
         data:
-          ctx.$store.state.article.modal.lastLoadedId !== null
-            ? ctx.$store.state.article.modal.article.get(
-                ctx.$store.state.article.modal.lastLoadedId
-              )
+          lastLoadedId.value !== null
+            ? ctx.$store.state.article.modal.article.get(lastLoadedId.value)
             : null,
       };
-    });
-    watch(modalData, (a) => {
-      console.log(a);
     });
     const cardsLoaded = computed(() => {
       return ctx.$store.getters.articles.size > 0
@@ -60,11 +66,21 @@ export default {
       await ctx.$store.dispatch('setModalActive', true);
       await ctx.$store.dispatch('getArticle', id);
     };
+    const loadMoreArticles = async () => {
+      ctx.$store.dispatch('getArticles');
+    };
     const closeModal = async () => {
       await ctx.$store.dispatch('setModalActive', false);
     };
 
-    return { openModal, closeModal, isLoadingNews, cardsLoaded, modalData };
+    return {
+      openModal,
+      closeModal,
+      loadMoreArticles,
+      isLoadingNews,
+      cardsLoaded,
+      modalData,
+    };
   },
 };
 </script>

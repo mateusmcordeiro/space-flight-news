@@ -7,9 +7,21 @@
   >
     <div :class="$style['modal-news__content']">
       <div :class="$style['modal-news__news']">
-        <card-news removeTextLimit removeDetailButton />
+        <loading :active="loading" v-if="loading" hasText />
+        <template v-else>
+          <card-news
+            v-if="news !== null"
+            :title="news.title"
+            :date="news.date"
+            :imageUrl="news.imageUrl"
+            :badges="news.badges"
+            :summary="news.summary"
+            removeTextLimit
+            removeDetailButton
+          />
+        </template>
       </div>
-      <s-f-button @click="$emit('onClose', e)">Ir para o site</s-f-button>
+      <s-f-button @click="goToPage">Ir para o site</s-f-button>
     </div>
   </div>
 </template>
@@ -17,16 +29,36 @@
 import { watch } from '@vue/runtime-core';
 import SFButton from '@/shared/components/atoms/SFButton.vue';
 import CardNews from '@/shared/components/organisms/CardNews.vue';
-
+import Loading from '@/shared/components/atoms/Loading.vue';
 export default {
   components: {
     SFButton,
     CardNews,
+    Loading,
   },
   props: {
+    loading: {
+      type: Boolean,
+      default: false,
+    },
+    news: {
+      type: Object,
+      default: null,
+    },
     active: Boolean,
   },
-  setup(props) {
+  setup(props, { emit }) {
+    const goToPage = (e) => {
+      emit('onClose', e);
+      window.open(props.news.url, '_blank');
+    };
+
+    watch(
+      () => props.news,
+      (value) => {
+        console.log(value);
+      }
+    );
     watch(
       () => props.active,
       (value) => {
@@ -38,6 +70,9 @@ export default {
         }
       }
     );
+    return {
+      goToPage,
+    };
   },
 };
 </script>

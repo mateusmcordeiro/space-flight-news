@@ -51,9 +51,14 @@ export default {
       await commit('setModalLoading', true);
       const { data } = await this.$api.article.get(id);
       const article = state.modal.article;
-      article.set(id, data);
+      article.set(id, {
+        ...data,
+        date: dayjs(data.publishedAt, 'YYYY-MM-DDThh:mm:ss').format(
+          'DD/MM/YYYY'
+        ),
+      });
       await commit('setLastLoaded', id);
-      await commit('setArticle', article);
+      await commit('setModalArticle', article);
       await commit('setModalLoading', false);
     } catch (error) {
       //console.log(error);

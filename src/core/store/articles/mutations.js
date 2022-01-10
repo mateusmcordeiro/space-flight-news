@@ -15,6 +15,6 @@ export default {
     state.loading = loading;
   },
   setLastLoaded(state, id) {
-    state.moda.lastLoadedId = id;
+    state.modal.lastLoadedId = id;
   },
 };
