@@ -4,7 +4,7 @@ export default {
   },
 
   article(state) {
-    return state.article;
+    return state.modal.article;
   },
   isLoading(state) {
     return state.loading;

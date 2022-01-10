@@ -8,51 +8,30 @@
     transparent
   >
     <template v-slot:image>
-      <img :src="backgroundCard" />
+      <img :src="imageUrl" />
     </template>
     <template v-slot:content>
       <header :class="$style['card-news__header']">
-        <h3>Tenete ergo quod si servitus</h3>
+        <h3>{{ title }}</h3>
         <div :class="$style['card-news__status']">
-          <p :class="$style['card-news__release-date']">11/10/1997</p>
+          <p :class="$style['card-news__release-date']">{{ date }}</p>
           <div :class="$style['card-news__badges']">
-            <badge>newsSite</badge>
-            <badge>newsSite</badge>
-            <badge>newsSite</badge>
+            <badge v-for="badge in badges" :key="badge.id">{{
+              badge.text
+            }}</badge>
           </div>
         </div>
       </header>
       <article :class="$style['card-news__resume']">
         <p>
-          Opus igitur est dicere possit dura omni specie, "Tu autem in specie,
-          non videntur, nec omnino rest est." Et examine ab eis praecepta eius
-          quae Opus igitur est dicere possit dura omni specie, "Tu autem in
-          specie, non videntur, nec omnino rest est." Et examine ab eis
-          praecepta eius quae Opus igitur est dicere possit dura omni specie,
-          "Tu autem in specie, non videntur, nec omnino rest est." Et examine ab
-          eis praecepta eius quae Opus igitur est dicere possit dura omni
-          specie, "Tu autem in specie, non videntur, nec omnino rest est." Et
-          examine ab eis praecepta eius quae Opus igitur est dicere possit dura
-          omni specie, "Tu autem in specie, non videntur, nec omnino rest est."
-          Et examine ab eis praecepta eius quae Opus igitur est dicere possit
-          dura omni specie, "Tu autem in specie, non videntur, nec omnino rest
-          est." Et examine ab eis praecepta eius quae Opus igitur est dicere
-          possit dura omni specie, "Tu autem in specie, non videntur, nec omnino
-          rest est." Et examine ab eis praecepta eius quae Opus igitur est
-          dicere possit dura omni specie, "Tu autem in specie, non videntur, nec
-          omnino rest est." Et examine ab eis praecepta eius quae Opus igitur
-          est dicere possit dura omni specie, "Tu autem in specie, non videntur,
-          nec omnino rest est." Et examine ab eis praecepta eius quae Opus
-          igitur est dicere possit dura omni specie, "Tu autem in specie, non
-          videntur, nec omnino rest est." Et examine ab eis praecepta eius quae
-          Opus igitur est dicere possit dura omni specie, "Tu autem in specie,
-          non videntur, nec omnino rest est." Et examine ab eis praecepta eius
-          quae Opus igitur est dicere possit dura omni specie, "Tu autem in
-          specie, non videntur, nec omnino rest est." Et examine ab eis
-          praecepta eius quae
+          {{ summary }}
         </p>
-
-        <s-f-button @click="$emit('openNews', $event)">Ver mais</s-f-button>
+        <s-f-button
+          v-if="!removeDetailButton"
+          @click="$emit('openNews', $event)"
+        >
+          Ver mais
+        </s-f-button>
       </article>
     </template>
   </card>
@@ -64,7 +43,16 @@ import backgroundCard from '@/assets/images/card.jpg';
 import Badge from '@/shared/components/atoms/Badge';
 export default {
   props: {
+    removeDetailButton: {
+      type: Boolean,
+      default: false,
+    },
     removeTextLimit: Boolean,
+    title: String,
+    date: String,
+    imageUrl: String,
+    badges: Array,
+    summary: String,
   },
   components: {
     Card,

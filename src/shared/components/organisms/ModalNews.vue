@@ -7,7 +7,7 @@
   >
     <div :class="$style['modal-news__content']">
       <div :class="$style['modal-news__news']">
-        <card-news removeTextLimit />
+        <card-news removeTextLimit removeDetailButton />
       </div>
       <s-f-button @click="$emit('onClose', e)">Ir para o site</s-f-button>
     </div>
