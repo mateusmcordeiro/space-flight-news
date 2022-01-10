@@ -12,6 +12,7 @@
         :options="selectOptions"
         :placeholder="'Categoria'"
         :class="$style.select"
+        @change="$emit('onFilter', { e: $event, filters })"
       />
     </form>
   </div>
