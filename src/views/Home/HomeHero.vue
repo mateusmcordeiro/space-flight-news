@@ -28,8 +28,11 @@ export default {
     const doFilter = async ({ filters }) => {
       const orientation = filters.orientation === 'asc' ? 'publishedAt' : '';
       await ctx.$store.dispatch('getArticles', {
-        _sort: orientation,
-        title_contains: filters.searchText,
+        params: {
+          _sort: orientation,
+          title_contains: filters.searchText,
+        },
+        backward: false,
       });
     };
     return { doFilter };

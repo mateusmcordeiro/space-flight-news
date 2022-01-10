@@ -23,9 +23,20 @@ export default {
       }
       return paginationParams;
     };
+
     onMounted(async () => {
       const paginationParams = getParamsFromQS();
-      ctx.$store.dispatch('getArticles', paginationParams);
+      ctx.$store.dispatch('getArticles', {
+        params: paginationParams,
+        backward: false,
+      });
+      window.onpopstate = () => {
+        const paginationParams = getParamsFromQS();
+        ctx.$store.dispatch('getArticles', {
+          params: paginationParams,
+          backward: true,
+        });
+      };
     });
   },
 };

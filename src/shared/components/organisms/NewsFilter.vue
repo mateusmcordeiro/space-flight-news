@@ -22,6 +22,7 @@ import SFInput from '@/shared/components/atoms/SFInput.vue';
 import SFSelect from '@/shared/components/atoms/SFSelect.vue';
 
 import { reactive } from '@vue/reactivity';
+import { getCurrentInstance, watch } from '@vue/runtime-core';
 
 export default {
   components: {
@@ -29,12 +30,25 @@ export default {
     SFSelect,
   },
   setup() {
+    const { ctx } = getCurrentInstance();
     const selectOptions = [
       { value: '', text: 'Sort', disabled: true },
       { value: 'asc', text: 'Mais antigas', disabled: false },
       { value: 'desc', text: 'Mais novas', disabled: false },
     ];
     const filters = reactive({ searchText: '', orientation: '' });
+    watch(
+      () => ctx.$store.state.article.pagination,
+      (value) => {
+        if (value.title_contains) {
+          filters.searchText = value.title_contains;
+        }
+
+        if (value._sort) {
+          filters.orientation = value._sort === 'publishedAt' ? 'asc' : 'desc';
+        }
+      }
+    );
     return { filters, selectOptions };
   },
 };

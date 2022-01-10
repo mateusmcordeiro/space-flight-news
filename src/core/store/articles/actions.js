@@ -1,8 +1,32 @@
 import dayjs from 'dayjs';
-
+const transformPureObjectToQueryStringObject = (object) => {
+  const URLParams = new URLSearchParams();
+  Object.entries(object).map(([key, value]) => {
+    URLParams.set(key, value);
+  });
+  return URLParams;
+};
+const URLObject = (URLSearchParams) => {
+  const url = new URL(window.location);
+  for (const [key, value] of URLSearchParams) {
+    url.searchParams.set(key, value);
+  }
+  return url;
+};
 export default {
-  setPaginationConfig({ commit, state }, config) {
-    commit('setPaginationConfig', { ...state.pagination, ...config });
+  setPaginationConfig({ commit, state }, { params, backward }) {
+    const pagination = {
+      ...state.pagination,
+      ...params,
+    };
+    if (!backward) {
+      const URLSearchParams = transformPureObjectToQueryStringObject(
+        pagination
+      );
+      const url = URLObject(URLSearchParams);
+      history.pushState(pagination, document.title, url);
+    }
+    commit('setPaginationConfig', pagination);
   },
   setArticles({ commit }, data) {
     commit('setArticles', data);
@@ -25,10 +49,10 @@ export default {
   setLastLoaded({ commit }, id) {
     commit('setLastLoaded', id);
   },
-  async getArticles({ commit, state }, params) {
+  async getArticles({ commit, state, dispatch }, { params, backward = false }) {
     try {
       await commit('setLoading', true);
-      await commit('setPaginationConfig', { ...state.pagination, ...params });
+      await dispatch('setPaginationConfig', { params, backward });
       const { data } = await this.$api.article.fetchList(state.pagination);
       const map = new Map();
       data.map((article, index) => {
