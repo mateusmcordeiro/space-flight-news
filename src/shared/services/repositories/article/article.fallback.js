@@ -7,17 +7,17 @@ function NotFoundException(message) {
 
 export default () => ({
   fetchList(params = { _limit: 10, _start: 0 }) {
-    if (store.article.getters.articles.has(params.page)) {
+    if (store.getters.articles.has(params.page)) {
       return Promise.resolve({
-        data: store.article.getters.articles.get(params.page),
+        data: store.getters.articles.get(params.page),
       });
     }
     throw new NotFoundException('Not found in storage');
   },
   get(articleId) {
-    if (store.article.getters.articleInfos.has(articleId)) {
+    if (store.getters.article.has(articleId)) {
       return Promise.resolve({
-        data: store.article.getters.articleInfos.get(articleId),
+        data: store.getters.article.get(articleId),
       });
     }
     throw new NotFoundException('Not found in storage');
