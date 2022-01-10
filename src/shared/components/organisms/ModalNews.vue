@@ -54,12 +54,6 @@ export default {
     };
 
     watch(
-      () => props.news,
-      (value) => {
-        console.log(value);
-      }
-    );
-    watch(
       () => props.active,
       (value) => {
         const appBody = document.querySelector('body');

@@ -5,16 +5,10 @@
 </template>
 
 <script>
-import { onMounted, getCurrentInstance } from 'vue';
 export default {
   components: {},
   name: 'App',
-  setup() {
-    const { ctx } = getCurrentInstance();
-    onMounted(async () => {
-      console.log(await ctx.$api.article.fetchList());
-    });
-  },
+  setup() {},
 };
 </script>
 <style lang="scss" scoped>
