@@ -15,8 +15,17 @@ export default {
   },
   setup() {
     const { ctx } = getCurrentInstance();
+    const getParamsFromQS = () => {
+      const params = new URLSearchParams(window.location.search);
+      const paginationParams = {};
+      for (const [key, value] of params) {
+        paginationParams[key] = value;
+      }
+      return paginationParams;
+    };
     onMounted(async () => {
-      ctx.$store.dispatch('getArticles');
+      const paginationParams = getParamsFromQS();
+      ctx.$store.dispatch('getArticles', paginationParams);
     });
   },
 };
