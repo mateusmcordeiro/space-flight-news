@@ -73,7 +73,7 @@ export default {
       bottom: 0;
       cursor: pointer;
       display: flex;
-
+      padding: 0;
       height: 24px;
       justify-content: center;
       margin: auto;
