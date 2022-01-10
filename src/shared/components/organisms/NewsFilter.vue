@@ -22,15 +22,15 @@ import SFInput from '@/shared/components/atoms/SFInput.vue';
 import SFSelect from '@/shared/components/atoms/SFSelect.vue';
 
 import { reactive } from '@vue/reactivity';
-import { getCurrentInstance, watch } from '@vue/runtime-core';
-
+import { watch } from '@vue/runtime-core';
+import { useStore } from 'vuex';
 export default {
   components: {
     SFInput,
     SFSelect,
   },
   setup() {
-    const { ctx } = getCurrentInstance();
+    const store = useStore();
     const selectOptions = [
       { value: '', text: 'Sort', disabled: true },
       { value: 'asc', text: 'Mais antigas', disabled: false },
@@ -38,7 +38,7 @@ export default {
     ];
     const filters = reactive({ searchText: '', orientation: '' });
     watch(
-      () => ctx.$store.state.article.pagination,
+      () => store.state.article.pagination,
       (value) => {
         if (value.title_contains) {
           filters.searchText = value.title_contains;

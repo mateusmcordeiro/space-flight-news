@@ -49,9 +49,9 @@ export default {
   setLastLoaded({ commit }, id) {
     commit('setLastLoaded', id);
   },
-  async getArticles({ commit, state, dispatch }, { params, backward = false }) {
+  async getArticles({ state, dispatch }, { params, backward = false }) {
     try {
-      await commit('setLoading', true);
+      await dispatch('setLoading', true);
       await dispatch('setPaginationConfig', { params, backward });
       const { data } = await this.$api.article.fetchList(state.pagination);
       const map = new Map();
@@ -68,8 +68,8 @@ export default {
         return { ...newContent };
       });
 
-      await commit('setArticles', map);
-      await commit('setLoading', false);
+      await dispatch('setArticles', map);
+      await dispatch('setLoading', false);
     } catch (error) {
       //console.log(error);
     }

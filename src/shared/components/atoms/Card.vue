@@ -76,7 +76,7 @@ export default {
     }
     #{$self}__container {
       @include media-breakpoint-up(md) {
-        padding: 0 40px 0 0;
+        padding: 0;
       }
     }
   }

@@ -4,9 +4,11 @@
 </template>
 
 <script>
-import { getCurrentInstance, onMounted } from '@vue/runtime-core';
+import { onMounted } from '@vue/runtime-core';
 import HomeHero from './HomeHero.vue';
 import HomeNewsList from './HomeNewsList.vue';
+import { useStore } from 'vuex';
+
 export default {
   name: 'App',
   components: {
@@ -14,7 +16,7 @@ export default {
     HomeNewsList,
   },
   setup() {
-    const { ctx } = getCurrentInstance();
+    const store = useStore();
     const getParamsFromQS = () => {
       const params = new URLSearchParams(window.location.search);
       const paginationParams = {};
@@ -26,13 +28,13 @@ export default {
 
     onMounted(async () => {
       const paginationParams = getParamsFromQS();
-      ctx.$store.dispatch('getArticles', {
+      store.dispatch('getArticles', {
         params: paginationParams,
         backward: false,
       });
       window.onpopstate = () => {
         const paginationParams = getParamsFromQS();
-        ctx.$store.dispatch('getArticles', {
+        store.dispatch('getArticles', {
           params: paginationParams,
           backward: true,
         });

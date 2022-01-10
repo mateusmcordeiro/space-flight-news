@@ -39,7 +39,6 @@
 <script>
 import Card from '@/shared/components/atoms/Card';
 import SFButton from '@/shared/components/atoms/SFButton';
-import backgroundCard from '@/assets/images/card.jpg';
 import Badge from '@/shared/components/atoms/Badge';
 export default {
   props: {
@@ -59,9 +58,7 @@ export default {
     SFButton,
     Badge,
   },
-  setup() {
-    return { backgroundCard };
-  },
+  setup() {},
 };
 </script>
 <style lang="scss" module>

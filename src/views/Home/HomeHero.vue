@@ -16,7 +16,7 @@
 <script>
 import Logo from '@/shared/components/assets/Logo.vue';
 import NewsFilter from '@/shared/components/organisms/NewsFilter.vue';
-import { getCurrentInstance } from '@vue/runtime-core';
+import { useStore } from 'vuex';
 
 export default {
   components: {
@@ -24,10 +24,11 @@ export default {
     NewsFilter,
   },
   setup() {
-    const { ctx } = getCurrentInstance();
+    const store = useStore();
+
     const doFilter = async ({ filters }) => {
       const orientation = filters.orientation === 'asc' ? 'publishedAt' : '';
-      await ctx.$store.dispatch('getArticles', {
+      await store.dispatch('getArticles', {
         params: {
           _sort: orientation,
           title_contains: filters.searchText,

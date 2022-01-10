@@ -10,6 +10,7 @@
           :imageUrl="card.imageUrl"
           :badges="card.badges"
           :summary="card.summary"
+          :reversed="card.reversed"
           @openNews="openModal($event, id)"
         />
       </section>
@@ -32,7 +33,9 @@
 import Card from '@/shared/components/organisms/CardNews.vue';
 import InfiniteLoad from '@/shared/components/molecules/InfiniteLoad.vue';
 import ModalNews from '@/shared/components/organisms/ModalNews.vue';
-import { computed, getCurrentInstance } from 'vue';
+import { computed } from 'vue';
+import { useStore } from 'vuex';
+
 export default {
   components: {
     Card,
@@ -40,35 +43,33 @@ export default {
     ModalNews,
   },
   setup() {
-    const { ctx } = getCurrentInstance();
+    const store = useStore();
     const lastLoadedId = computed(() => {
-      return ctx.$store.state.article.modal.lastLoadedId;
+      return store.state.article.modal.lastLoadedId;
     });
     const modalData = computed(() => {
       return {
-        ...ctx.$store.state.article.modal,
+        ...store.state.article.modal,
         data:
           lastLoadedId.value !== null
-            ? ctx.$store.state.article.modal.article.get(lastLoadedId.value)
+            ? store.state.article.modal.article.get(lastLoadedId.value)
             : null,
       };
     });
     const cardsLoaded = computed(() => {
-      return ctx.$store.getters.articles.size > 0
-        ? [...ctx.$store.getters.articles]
-        : [];
+      return store.getters.articles.size > 0 ? [...store.getters.articles] : [];
     });
     const isLoadingNews = computed(() => {
-      return ctx.$store.getters.isLoading;
+      return store.getters.isLoading;
     });
 
     const openModal = async (e, id) => {
-      await ctx.$store.dispatch('setModalActive', true);
-      await ctx.$store.dispatch('getArticle', id);
+      await store.dispatch('setModalActive', true);
+      await store.dispatch('getArticle', id);
     };
     const loadMoreArticles = async () => {
-      const pagination = ctx.$store.state.article.pagination;
-      ctx.$store.dispatch('getArticles', {
+      const pagination = store.state.article.pagination;
+      store.dispatch('getArticles', {
         params: {
           _limit: parseInt(pagination._limit) + 10,
         },
@@ -76,7 +77,7 @@ export default {
       });
     };
     const closeModal = async () => {
-      await ctx.$store.dispatch('setModalActive', false);
+      await store.dispatch('setModalActive', false);
     };
 
     return {
