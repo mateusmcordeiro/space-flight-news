@@ -67,7 +67,10 @@ export default {
       await ctx.$store.dispatch('getArticle', id);
     };
     const loadMoreArticles = async () => {
-      ctx.$store.dispatch('getArticles');
+      const pagination = ctx.$store.state.article.pagination;
+      ctx.$store.dispatch('getArticles', {
+        _limit: pagination._limit + 10,
+      });
     };
     const closeModal = async () => {
       await ctx.$store.dispatch('setModalActive', false);

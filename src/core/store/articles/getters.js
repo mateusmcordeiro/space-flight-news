@@ -9,4 +9,7 @@ export default {
   isLoading(state) {
     return state.loading;
   },
+  pagination(state) {
+    state.pagination;
+  },
 };

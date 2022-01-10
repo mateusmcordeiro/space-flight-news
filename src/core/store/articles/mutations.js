@@ -17,4 +17,7 @@ export default {
   setLastLoaded(state, id) {
     state.modal.lastLoadedId = id;
   },
+  setPaginationConfig(state, config) {
+    state.pagination = config;
+  },
 };

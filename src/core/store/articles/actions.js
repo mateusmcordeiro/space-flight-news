@@ -1,6 +1,9 @@
 import dayjs from 'dayjs';
 
 export default {
+  setPaginationConfig({ commit, state }, config) {
+    commit('setPaginationConfig', { ...state.pagination, ...config });
+  },
   setArticles({ commit }, data) {
     commit('setArticles', data);
   },
@@ -22,10 +25,11 @@ export default {
   setLastLoaded({ commit }, id) {
     commit('setLastLoaded', id);
   },
-  async getArticles({ commit }) {
+  async getArticles({ commit, state }, params) {
     try {
       await commit('setLoading', true);
-      const { data } = await this.$api.article.fetchList();
+      await commit('setPaginationConfig', { ...state.pagination, ...params });
+      const { data } = await this.$api.article.fetchList(state.pagination);
       const map = new Map();
       data.map((article, index) => {
         const newContent = {
