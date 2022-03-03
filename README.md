@@ -15,7 +15,7 @@ Projeto para implementação de uma pequena aplicação usando o Vue 3 e a Compo
 Para rodar o projeto você deve clonar o repositório do git, como está a seguir:
 
 ```sh
-$ git clone https://lab.coodesh.com/mateusmcordeiro/space-flight-news.git spaceflight
+$ git clone https://github.com/mateusmcordeiro/space-flight-news.git spaceflight
 $ cd spaceflight
 $ cp .env.example .env
 ```
