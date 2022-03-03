@@ -32,7 +32,7 @@ $ npm run serve
 Para rodar o projeto você deve clonar o repositório do git e configurar o arquivo .env com o link da api do spaceflightnewsapi, como está a seguir:
 
 ```sh
-$ git clone https://lab.coodesh.com/mateusmcordeiro/space-flight-news.git spaceflight
+$ git clone https://github.com/mateusmcordeiro/space-flight-news.git spaceflight
 $ cd spaceflight
 $ cp .env.example .env
 ```
